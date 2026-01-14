@@ -1,7 +1,7 @@
 Basic Pathtracer Written in C supports 
-Diffuse, Microfacet and Dielectric Materials, 
-homogeneous absorbing Media, 
-NEE (Next Event Estimation) based pathspace importance sampling.
+diffuse, microfacet and dielectric materials, 
+homogeneous media, 
+NEE (Next Event Estimation) based pathspace importance sampling (for non participating media).
 # Dependencies
 The pathtracer itself does not use any dependencies however for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
 # Compiling on Linux
