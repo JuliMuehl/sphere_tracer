@@ -1,4 +1,7 @@
-Basic Pathtracer Written in C Supporting Diffuse, Microfacet and Dielectric Materials
+Basic Pathtracer Written in C supports 
+Diffuse, Microfacet and Dielectric Materials, 
+homogeneous absorbing Media, 
+NEE (Next Event Estimation) based pathspace importance sampling.
 # Dependencies
 The pathtracer itself does not use any dependencies however for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
 # Compiling on Linux
