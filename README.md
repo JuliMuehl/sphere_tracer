@@ -3,7 +3,7 @@ diffuse, microfacet and dielectric materials,
 homogeneous media, 
 NEE (Next Event Estimation) based pathspace importance sampling (for non participating media).
 
-[SilverCar](md_assets/out.png)
+![out.png](md_assets/out.png)
 # Dependencies
 The pathtracer itself does not use any dependencies however for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
 # Compiling on Linux
