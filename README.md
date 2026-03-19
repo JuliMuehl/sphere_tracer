@@ -5,11 +5,11 @@ NEE (Next Event Estimation) based pathspace importance sampling (for non partici
 
 ![out.png](md_assets/out.png)
 # Dependencies
-The pathtracer itself does not use any external dependencies however for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
+The pathtracer itself only uses the standard library and pthreads for parallelization. However for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
 # Compiling on Linux
 To build the executable run
 ```bash
-$ cc -lm -lGL -lglfw -lGLEW -Iinclude -Ofast src/*.c -o sphere_tracer
+$ gcc -pthread -lm -lGL -lglfw -lGLEW -Iinclude -Ofast src/*.c -o sphere_tracer
 ```
 where cc is the C compiler of choice e.g. gcc or clang.
 Then you can run the Program with
