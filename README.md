@@ -4,7 +4,6 @@ homogeneous media,
 NEE (Next Event Estimation) based pathspace importance sampling (for non participating media).
 
 ![out.png](md_assets/out.png)
-![out_dielectric.png](md_assets/out_dielectric.png)
 # Dependencies
 The pathtracer itself does not use any dependencies however for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
 # Compiling on Linux
