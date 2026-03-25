@@ -5,7 +5,7 @@ NEE (Next Event Estimation) based pathspace importance sampling (for non partici
 
 ![out.png](md_assets/out.png)
 # Dependencies
-The pathtracer itself only uses the standard library and pthreads for parallelization. However for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used.
+The pathtracer itself only uses the standard library and pthreads for parallelization. However for the purpose of displaying the current state of the image in a window GLFW, OpenGL and GLEW are used. Moreover, stbimage.h is used to write the image to disk.
 # Compiling on Linux
 To build the executable run
 ```bash
