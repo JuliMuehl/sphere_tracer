@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "vectors.h"
 #include "sampling.h"
 #include "bsdf.h"
 
@@ -111,8 +112,6 @@ float pdf_bsdf(struct BSDF* bsdf,struct BSDFQueryRecord* rec){
       break;
     }
     case BSDF_COOK_TORRANCE:{
-      //Not implemented yet
-      //TODO: implement
       float alpha = bsdf->cook_torrance.alpha;//(1.2 - 0.2 * sqrt(rec->wi.z)) * bsdf->cook_torrance.alpha;
       float alpha_squared = alpha * alpha;
       struct Vector3f wh = normalize_v3f(add_v3f(rec->wo,rec->wi));

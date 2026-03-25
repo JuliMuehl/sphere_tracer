@@ -299,8 +299,8 @@ void* render_job(void* data){
       }else{
         for(uint32_t ray_idx = 0;ray_idx<num_rays;ray_idx++){
           struct Ray ray = init_ray;
-          color = add_v3f(color,irradiance_bsdf_pathtracer(&ray,world,&rng));
-          //color = add_v3f(color,irradiance_next_event_estimation_area_light_only(&ray,world,&rng));
+          //color = add_v3f(color,irradiance_bsdf_pathtracer(&ray,world,&rng));
+          color = add_v3f(color,irradiance_next_event_estimation_area_light_only(&ray,world,&rng));
         }
         color = smul_v3f(1.0f/num_rays,color);
       }
@@ -415,7 +415,7 @@ int main(int argc,char** argv){
   struct TriangleArray triangles = load_stl("/home/juli/sphere_tracer/monkey.stl");
   struct World world;
   world.aabbtree = create_aabbtree(triangles);
-  set_aabbtree_position(world.aabbtree,(struct Vector3f){0.0f,1.2f,3.0f});
+  set_aabbtree_position(world.aabbtree,(struct Vector3f){0.0f,1.5f,7.0f});
   float light_x = 0.0;
   float light_z = 2.0;
   world.light.y = 3.5;
@@ -433,7 +433,7 @@ int main(int argc,char** argv){
   world.spheres[0].center = (struct Vector3f) {-3.0f,1.2f,5.0f};
 
   world.spheres[1].radius = 1.0f;
-  world.spheres[1].center = (struct Vector3f) { 0.0f,1000.2f,3.0f};
+  world.spheres[1].center = (struct Vector3f) { 0.0f,1.2f,3.0f};
 
   world.spheres[2].radius = 1.0f;
   world.spheres[2].center = (struct Vector3f) { 3.0f,1.2f,5.0f};
@@ -480,7 +480,7 @@ int main(int argc,char** argv){
   dielectric_bsdf.type = BSDF_DIELECTRIC;
   dielectric_bsdf.dielectric.eta_inside = 1.8;
   dielectric_bsdf.dielectric.eta_outside = 1.0;
-  float alpha = 0.30;
+  float alpha = 0.10;
   copper_bsdf.cook_torrance.alpha = alpha;
   silver_bsdf.cook_torrance.alpha = alpha;
   gold_bsdf.cook_torrance.alpha = alpha;
@@ -490,7 +490,7 @@ int main(int argc,char** argv){
   world.spheres[3].bsdf = blue_bsdf;
   world.spheres[4].bsdf = red_bsdf;
   world.spheres[5].bsdf = red_bsdf;
-  world.aabbtree_bsdf = silver_bsdf;
+  world.aabbtree_bsdf = gold_bsdf;
   world.plane_bsdf.diffuse.albedo = (struct Vector3f){0.2,0.2,0.2};
   world.plane_bsdf.type = BSDF_DIFFUSE;
   int num_rays = argc >= 2 ? atoi(argv[1]):40;

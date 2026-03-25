@@ -182,7 +182,6 @@ struct AABBTreeNode* build_aabbtree_from_leaf_nodes_sah(struct AABBTreeNode** le
       minCostSplitBucket = i;
     }
   }
-  //printf("minCostSplitBucket=%d,minCost=%f\n",minCostSplitBucket,minCost);
 
   size_t i = slice_start,j=slice_end-1;
   while(i < j){
@@ -436,71 +435,3 @@ struct RenderThreadData{
   int j_start,j_end;
   struct LinearAABBTree* tree;
 };
-
-/*
-
-void* render_job(void* arg){
-  struct RenderThreadData* data = (struct RenderThreadData*) arg;
-  const struct Vector3f light_dir = {-1.0f,+1.0f,1.0f};
-  for(int i = 0;i<data->img_height;i++){
-    for(int j = data->j_start;j<data->j_end;j++){
-      float u=(float)j/data->img_width,v=1.0f-(float)i/data->img_height;
-      
-      struct Vector3f hit_color = {1.0f,1.0f,1.0f};
-      //float plane_t = -ray.origin.z/ray.direction.z;
-      struct Vector3f color = {0.0f,0.0f,0.0f};
-      struct Vector3f sky_color = {0.8f,0.8f,0.8f};
-      struct Vector3f bunny_albedo = {0.9f,0.85f,0.70f};
-      struct Vector3f plane_albedo = {0.7f,0.7f,0.7f};
-      //if(it.hit && !(plane_t < it.t && plane_t > 0)){
-      uint32_t mc_iters = 500; 
-      for(uint32_t mc_iter = 0;mc_iter<mc_iters;mc_iter++){
-        struct Ray ray;
-        ray.direction = normalize_v3f((struct Vector3f){2.0f * u - 1.0f,+1.0,2.0f * v - 1.0f});
-        ray.origin = (struct Vector3f) {-0.00,-0.30f,0.15f};
-        struct Vector3f throughput = {1.0f,1.0f,1.0f};
-        for(;;){
-          struct Intersection it = intersect_ray_linear_aabbtree(data->tree,&ray);
-          float plane_t = -ray.origin.z/ray.direction.z;
-          if((plane_t < it.t || !it.hit) && plane_t > 0.0f){
-            struct Vector3f normal = {0.0f,0.0f,1.0f};
-            struct Vector3f wo = sample_uniform_hemisphere(&data->sampler,normal);
-            float cos_theta = fabs(dot_v3f(normal,wo));
-            float pdf = 1.0f / (2.0f * M_PI);
-            throughput.x *= plane_albedo.x / M_PI * cos_theta / pdf;
-            throughput.y *= plane_albedo.y / M_PI * cos_theta / pdf;
-            throughput.z *= plane_albedo.z / M_PI * cos_theta / pdf;
-            struct Vector3f point = add_v3f(ray.origin,smul_v3f(plane_t,ray.direction));
-            ray.origin = add_v3f(smul_v3f(0.00001f,wo),point);
-            ray.direction = wo;
-          }else if(it.hit){
-            struct Vector3f wo = sample_uniform_hemisphere(&data->sampler,it.normal);
-            float cos_theta = fabs(dot_v3f(it.normal,wo));
-            float pdf = 1.0f / (2.0f * M_PI);
-            throughput.x *= bunny_albedo.x / M_PI * cos_theta / pdf;
-            throughput.y *= bunny_albedo.y / M_PI * cos_theta / pdf;
-            throughput.z *= bunny_albedo.z / M_PI * cos_theta / pdf;
-            ray.origin = add_v3f(it.point,smul_v3f(0.0001f,wo));
-            ray.direction = wo;
-          }else{
-            throughput.x *= sky_color.x;
-            throughput.y *= sky_color.y;
-            throughput.z *= sky_color.z;
-            color = add_v3f(color,throughput);
-            break;
-          }
-        }
-      }
-      color = smul_v3f(1.0f/mc_iters,color);
-      color.x = max(min(color.x,1.0f),0.0f);
-      color.y = max(min(color.y,1.0f),0.0f);
-      color.z = max(min(color.z,1.0f),0.0f);
-      data->img_data[i*data->img_width*3 + j*3 + 0] = (uint8_t)(color.x * 255);
-      data->img_data[i*data->img_width*3 + j*3 + 1] = (uint8_t)(color.y * 255);
-      data->img_data[i*data->img_width*3 + j*3 + 2] = (uint8_t)(color.z * 255);
-    }
-  }
-  return NULL;
-}
-*/
-

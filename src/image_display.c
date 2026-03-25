@@ -132,7 +132,7 @@ void refresh_image_display(ImageDisplay* display_){
   glfwPollEvents();
 }
 
-void imshow_image_display(ImageDisplay* display_,uint32_t img_width,uint32_t img_height,uint8_t* img_data){
+void imshow_image_display(ImageDisplay* display_, uint32_t img_width, uint32_t img_height, uint8_t* img_data){
   struct ImageDisplay* display = display_;
   load_texture(display->texture,img_width,img_height,img_data);
   glUseProgram(display->program);
