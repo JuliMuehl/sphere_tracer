@@ -29,8 +29,10 @@ float G1(struct Vector3f wo,struct Vector3f wh,float alpha){
   float sin_theta = sqrtf(1.0f - cos_theta*cos_theta);
   float tan_theta = sin_theta / cos_theta;
   float a = 1.0f/(tan_theta * alpha);
+  //Standard rational approximation for geometry term
+  //instead of computing expensive term involving erf:
   //float lambda = (erf(a) - 1.0f) / 2.0f + 1.0f/(2.0f*a*sqrtf(M_PI)) * expf(-a*a);
-  //float lambda = 0.0f;
+  //We can compute:
   float lambda = (a < 1.6) * (1.0f - 1.259f*a + 0.396f*a*a) / (3.535f*a + 2.181f*a*a);
   return 1.0f/(1.0f + lambda);
 }
@@ -39,9 +41,6 @@ float geometry_term(struct Vector3f wi,struct Vector3f wo,struct Vector3f wh,flo
   return G1(wi,wh,alpha) * G1(wo,wh,alpha);
 }
 
-//Fresnel term includes an absorption coefficient in the imaginary part of index of refraction N = eta - i kappa
-//We assume the light doesn't change medium when hitting a microfacet however the facet absorbs light and the air/vacuum doesn't
-//Thus eta1 = eta2 = 1.0f, kappa1 = 0.0f, kappa2 = bsdf.cook_torrance.kappa2.
 float fresnel(float eta1,float kappa1,float eta2,float kappa2,float cos_r){
   _Complex float N1 = eta1 + kappa1 * _Complex_I;
   _Complex float N2 = eta2 + kappa2 * _Complex_I;
