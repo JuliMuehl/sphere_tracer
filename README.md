@@ -9,9 +9,12 @@ The pathtracer itself only uses the standard library and pthreads for paralleliz
 # Compiling on Linux
 To build the executable run
 ```bash
-$ gcc -pthread -lm -lGL -lglfw -lGLEW -Iinclude -Ofast src/*.c -o sphere_tracer
+$ make 
 ```
-where cc is the C compiler of choice e.g. gcc or clang.
+If you don't have gcc installed you need to change the first line in the Makefile to e.g. in case of clang
+``` Makefile
+CC=clang
+```
 Then you can run the Program with
 ```bash
 ./sphere_tracer
