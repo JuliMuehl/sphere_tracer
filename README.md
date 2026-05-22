@@ -1,7 +1,4 @@
-Basic Pathtracer Written in C supports 
-diffuse, microfacet and dielectric materials, 
-homogeneous media, 
-NEE (Next Event Estimation) based pathspace importance sampling (for non participating media).
+A basic path tracer written in C with support for diffuse, microfacet, and dielectric materials, homogeneous media, and NEE (Next Event Estimation)-based path-space importance sampling for non-participating media.
 
 ![out.png](md_assets/out.png)
 # Dependencies
