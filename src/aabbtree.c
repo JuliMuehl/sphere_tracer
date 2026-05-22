@@ -420,17 +420,9 @@ struct Intersection intersect_ray_aabbtree(struct Ray* ray,AABBTree* aabbtree){
   struct Ray transformed_ray;
   transformed_ray.tmin = ray->tmin;
   transformed_ray.origin = sub_v3f(ray->origin,tree->position);
-  transformed_ray.direction = ray->direction;
+  transformed_ray.direction = frame_to_local(&tree->frame, ray->direction);
   struct Intersection it = intersect_ray_linear_aabbtree(tree,&transformed_ray);
   it.normal = it.normal;
   it.point = add_v3f(tree->position,it.point);
   return it;
 }
-
-struct RenderThreadData{
-  int img_width;
-  int img_height;
-  uint8_t* img_data;
-  int j_start,j_end;
-  struct LinearAABBTree* tree;
-};
